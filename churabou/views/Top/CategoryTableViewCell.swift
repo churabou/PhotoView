@@ -12,8 +12,8 @@ import RxSwift
 
 protocol CategoryTableViewCellDelegate: class {
     func didSelectAll(_ indexPath: IndexPath)
-    
 }
+
 class CategoryTableViewCell: UITableViewCell {
     
     static var height: CGFloat {
@@ -34,7 +34,8 @@ class CategoryTableViewCell: UITableViewCell {
     fileprivate lazy var showButton: UIButton = {
         let b = UIButton()
         b.setTitle("全て見る", for: .normal)
-        b.setTitleColor(.red, for: .normal)
+        b.backgroundColor = UIColor(red: 1, green: 192/255, blue: 203/255, alpha: 1)
+        b.setTitleColor(.white, for: .normal)
         b.addTarget(self, action: #selector(actionButton), for: .touchUpInside)
         return b
     }()
@@ -46,6 +47,7 @@ class CategoryTableViewCell: UITableViewCell {
         v.dataSource = self
         v.delegate = self
         v.scrollIndicatorInsets = .zero
+        v.backgroundColor = .white
         v.register(CollectionCell.self, forCellWithReuseIdentifier: "cell")
         return v
     }()
