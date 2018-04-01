@@ -19,7 +19,6 @@ class ViewModel {
         self.name = name
         self.target = target
     }
-    
 
     var model$: Variable<[String]> = Variable([])
 

@@ -12,7 +12,7 @@ class CategoryDetailViewController: UIViewController {
     
     fileprivate lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: view.bounds.width/4, height: view.bounds.width/4)
+//        layout.itemSize = CGSize(width: view.bounds.width/4, height: view.bounds.width/4)
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         layout.scrollDirection = .horizontal
@@ -25,17 +25,17 @@ class CategoryDetailViewController: UIViewController {
         return v
     }()
     
-    fileprivate var bottomView = BottomView()
-    fileprivate var viewer = ViewerController()
     fileprivate var viewModel = ViewModel()
+    fileprivate var slider = SliderView()
+    fileprivate var viewer = ViewerController()
+    fileprivate var disPlayNum = 4
     
     override func viewDidLoad() {
         view.backgroundColor = .blue
         view.addSubview(collectionView)
-        bottomView.setUp()
-        bottomView.tapClosure = {
-        }
-        view.addSubview(bottomView)
+        slider.setUp()
+        slider.delegate = self
+        view.addSubview(slider)
     }
     
     func setVM(_ viewModel: ViewModel) {
@@ -50,27 +50,29 @@ class CategoryDetailViewController: UIViewController {
             make.bottom.equalTo(-70)
         }
         
-        bottomView.snp.makeConstraints { (make) in
+        
+        slider.snp.makeConstraints { (make) in
             make.left.right.bottom.equalToSuperview()
             make.height.equalTo(70)
         }
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-//        navigationController?.setNavigationBarHidden(true, animated: false)
+}
+
+extension CategoryDetailViewController: SliderViewDelegate {
+    func didValueChanged(_ value: Int) {
+        disPlayNum = value
+        collectionView.reloadData()
     }
 }
 
-
-
 extension CategoryDetailViewController: UICollectionViewDelegateFlowLayout {
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        // Sketchのレイアウト比率に合わせる / w320px: 140x190
-//
-//        let s = view.bounds.width/4
-//        return CGSize(width: s-1, height: s-1)
-//    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        // Sketchのレイアウト比率に合わせる / w320px: 140x190
+
+        let s = view.bounds.width/CGFloat(disPlayNum)
+        return CGSize(width: s-1, height: s-1)
+    }
 //
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
 //        return UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
