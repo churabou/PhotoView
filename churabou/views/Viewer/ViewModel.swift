@@ -10,6 +10,9 @@ import Foundation
 
 
 class ViewModel {
+    
+    var target = "pancake__suki"
+
     var models: [String] = [] {
         didSet {
             modelDidSet()
@@ -19,7 +22,7 @@ class ViewModel {
     var modelDidSet = {}
     
     func fetch() {
-        getTimeLine(completion: { urls in
+        getImage(of: target, completion: { urls in
             self.models = urls
         })
     }

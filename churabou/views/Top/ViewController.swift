@@ -11,6 +11,12 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    let targets: [(String, String)] = [
+        ("ラーメン","capital_noodle"),
+        ("パンケーキ","pancake__suki"),
+        ("カレルチャペック", "karelabuzzy")
+    ]
+
     fileprivate lazy var tableView: UITableView = {
         let t = UITableView()
         t.frame = view.frame
@@ -35,11 +41,12 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {            
         let v = CategoryDetailViewController()
+        v.setVM(target: targets[indexPath.row].1)
         navigationController?.pushViewController(v, animated: true)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return targets.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -47,7 +54,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? CategoryTableViewCell else {
             return UITableViewCell()
         }
-        cell.setUp()
+        cell.setUp(name: targets[indexPath.row].0)
         return cell
     }
 }

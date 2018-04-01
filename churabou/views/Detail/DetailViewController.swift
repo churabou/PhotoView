@@ -12,6 +12,9 @@ class CategoryDetailViewController: UIViewController {
     
     fileprivate lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: view.bounds.width/4, height: view.bounds.width/4)
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
         layout.scrollDirection = .horizontal
         let v = UICollectionView(frame: .zero, collectionViewLayout: layout)
         v.backgroundColor = .green
@@ -32,16 +35,19 @@ class CategoryDetailViewController: UIViewController {
         view.addSubview(collectionView)
         bottomView.setUp()
         bottomView.tapClosure = {
-            self.play()
         }
         view.addSubview(bottomView)
+
+    }
+    
+    func setVM(target: String) {
         viewModel.modelDidSet = {
             self.collectionView.reloadData()
         }
+        viewModel.target = target
         viewer.share(viewModel: viewModel)
         viewModel.fetch()
     }
-    
     override func viewWillLayoutSubviews() {
 
         collectionView.snp.remakeConstraints { (make) in
@@ -60,35 +66,23 @@ class CategoryDetailViewController: UIViewController {
     }
 }
 
-extension CategoryDetailViewController {
-    
-    func play() {
-        
-        collectionView.snp.remakeConstraints { (make) in
-            make.left.right.equalToSuperview()
-            make.centerY.equalToSuperview()
-            make.height.equalTo(300)
-        }
-        
-        UIView.animate(withDuration: 0.2, animations: {
-            self.collectionView.layoutIfNeeded()
-        })
-    }
-}
-
 
 
 extension CategoryDetailViewController: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // Sketchのレイアウト比率に合わせる / w320px: 140x190
-        
-        let s = view.bounds.width/4
-        return CGSize(width: s-10, height: s-10)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        // Sketchのレイアウト比率に合わせる / w320px: 140x190
+//
+//        let s = view.bounds.width/4
+//        return CGSize(width: s-1, height: s-1)
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//        return UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
+//    }
+//
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
 }
 

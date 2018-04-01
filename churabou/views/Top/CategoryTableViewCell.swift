@@ -43,7 +43,8 @@ class CategoryTableViewCell: UITableViewCell {
         return v
     }()
 
-    func setUp() {
+    func setUp(name: String) {
+        nameLabel.text = name
         addSubview(nameLabel)
         addSubview(showButton)
         addSubview(collectionView)
