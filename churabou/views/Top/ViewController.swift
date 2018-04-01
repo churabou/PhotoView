@@ -8,13 +8,12 @@
 
 import UIKit
 
-
 class ViewController: UIViewController {
     
-    let targets: [(String, String)] = [
-        ("ラーメン","capital_noodle"),
-        ("パンケーキ","pancake__suki"),
-        ("カレルチャペック", "karelabuzzy")
+    let targets: [ViewModel] = [
+        ViewModel("ラーメン","capital_noodle"),
+        ViewModel("パンケーキ","pancake__suki"),
+        ViewModel("カレルチャペック", "karelabuzzy")
     ]
 
     fileprivate lazy var tableView: UITableView = {
@@ -26,10 +25,18 @@ class ViewController: UIViewController {
         return t
     }()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .orange
         view.addSubview(tableView)
+ 
+        
+        //おそらくリクエスト中にsubscribeしている。
+        DispatchQueue.global().async {
+            print("リクエスト")
+            self.targets.forEach { $0.fetch() }
+        }
     }
 }
 
@@ -41,7 +48,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {            
         let v = CategoryDetailViewController()
-        v.setVM(target: targets[indexPath.row].1)
+        v.setVM(targets[indexPath.row])
         navigationController?.pushViewController(v, animated: true)
     }
     
@@ -54,7 +61,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? CategoryTableViewCell else {
             return UITableViewCell()
         }
-        cell.setUp(name: targets[indexPath.row].0)
+        cell.setUp(targets[indexPath.row])
         return cell
     }
 }

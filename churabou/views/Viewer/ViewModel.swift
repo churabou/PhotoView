@@ -7,23 +7,25 @@
 //
 
 import Foundation
-
+import RxSwift
 
 class ViewModel {
     
-    var target = "pancake__suki"
-
-    var models: [String] = [] {
-        didSet {
-            modelDidSet()
-        }
+    var name = ""
+    var target = ""
+    
+    convenience init(_ name: String, _ target: String) {
+        self.init()
+        self.name = name
+        self.target = target
     }
     
-    var modelDidSet = {}
-    
+
+    var model$: Variable<[String]> = Variable([])
+
     func fetch() {
         getImage(of: target, completion: { urls in
-            self.models = urls
+            self.model$.value = urls
         })
     }
 }

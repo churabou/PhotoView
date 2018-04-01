@@ -8,6 +8,7 @@
 
 import SnapKit
 import Kingfisher
+import RxSwift
 
 class CategoryTableViewCell: UITableViewCell {
     
@@ -15,6 +16,7 @@ class CategoryTableViewCell: UITableViewCell {
         return (UIScreen.main.bounds.width/2 + 55)
     }
     
+    fileprivate var model = ViewModel()
     fileprivate lazy var nameLabel: UILabel = {
         let l = UILabel()
         l.font = UIFont.boldSystemFont(ofSize: 18)
@@ -42,9 +44,14 @@ class CategoryTableViewCell: UITableViewCell {
         v.register(CollectionCell.self, forCellWithReuseIdentifier: "cell")
         return v
     }()
-
-    func setUp(name: String) {
-        nameLabel.text = name
+    
+    private let bag = DisposeBag()
+    func setUp(_ viewModel: ViewModel) {
+        model = viewModel
+        model.model$.asObservable().subscribe(onNext: { _ in
+            self.collectionView.reloadData()
+        }).disposed(by: bag)
+        nameLabel.text = model.name
         addSubview(nameLabel)
         addSubview(showButton)
         addSubview(collectionView)
@@ -99,7 +106,7 @@ extension CategoryTableViewCell: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return model.model$.value.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -108,6 +115,7 @@ extension CategoryTableViewCell: UICollectionViewDelegate, UICollectionViewDataS
         }
         
         cell.setUp()
+        cell.loadImage(url: model.model$.value[indexPath.row])
         return cell
     }
     

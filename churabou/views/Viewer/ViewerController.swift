@@ -92,7 +92,7 @@ extension ViewerController: UICollectionViewDelegate, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.models.count
+        return viewModel.model$.value.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -100,7 +100,7 @@ extension ViewerController: UICollectionViewDelegate, UICollectionViewDataSource
             return UICollectionViewCell()
         }
         cell.setUp()
-        cell.loadImage(url: viewModel.models[indexPath.row])
+        cell.loadImage(url: viewModel.model$.value[indexPath.row])
         return cell
     }
 }

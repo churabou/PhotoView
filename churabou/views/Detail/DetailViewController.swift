@@ -37,17 +37,13 @@ class CategoryDetailViewController: UIViewController {
         bottomView.tapClosure = {
         }
         view.addSubview(bottomView)
-
     }
     
-    func setVM(target: String) {
-        viewModel.modelDidSet = {
-            self.collectionView.reloadData()
-        }
-        viewModel.target = target
+    func setVM(_ viewModel: ViewModel) {
+        self.viewModel = viewModel
         viewer.share(viewModel: viewModel)
-        viewModel.fetch()
     }
+    
     override func viewWillLayoutSubviews() {
 
         collectionView.snp.remakeConstraints { (make) in
@@ -93,7 +89,7 @@ extension CategoryDetailViewController: UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.models.count
+        return viewModel.model$.value.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -101,7 +97,7 @@ extension CategoryDetailViewController: UICollectionViewDelegate, UICollectionVi
             return UICollectionViewCell()
         }
         cell.setUp()
-        cell.loadImage(url: viewModel.models[indexPath.row])
+        cell.loadImage(url: viewModel.model$.value[indexPath.row])
         return cell
     }
     
