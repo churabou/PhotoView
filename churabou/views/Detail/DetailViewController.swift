@@ -40,7 +40,7 @@ class CategoryDetailViewController: UIViewController {
     
     func setVM(_ viewModel: ViewModel) {
         self.viewModel = viewModel
-        viewer.share(viewModel: viewModel)
+        viewer.bind(viewModel: viewModel)
     }
     
     override func viewWillLayoutSubviews() {

@@ -11,9 +11,9 @@ import UIKit
 class ViewController: UIViewController {
     
     let targets: [ViewModel] = [
+        ViewModel("子犬・子猫", "dogs_cats_bot"),
         ViewModel("ラーメン","capital_noodle"),
-        ViewModel("パンケーキ","pancake__suki"),
-        ViewModel("カレルチャペック", "karelabuzzy")
+        ViewModel("パンケーキ","pancake__suki")
     ]
 
     fileprivate lazy var tableView: UITableView = {

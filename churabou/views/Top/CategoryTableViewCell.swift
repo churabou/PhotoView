@@ -136,7 +136,7 @@ extension CategoryTableViewCell: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath)
         let v = ViewerController()
-        v.share(viewModel: model)
+        v.bind(viewModel: model)
         delegate?.didSelectImage(v)
     }
 }

@@ -13,36 +13,34 @@ class ViewerController: UIViewController {
     
     fileprivate var viewModel = ViewModel()
 
-    func share(viewModel: ViewModel) {
+    func bind(viewModel: ViewModel) {
         self.viewModel = viewModel
     }
 
     fileprivate lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        
         layout.scrollDirection = .horizontal
         let v = UICollectionView(frame: .zero, collectionViewLayout: layout)
         v.dataSource = self
         v.delegate = self
         v.alwaysBounceVertical = true
+        v.backgroundColor = .white
         v.scrollIndicatorInsets = .zero
         v.register(CollectionCell.self, forCellWithReuseIdentifier: "cell")
-//        v.isPagingEnabled = true
+        v.isPagingEnabled = true
         return v
     }()
     
     override func viewDidLoad() {
-        view.backgroundColor = .black
         view.addSubview(collectionView)
-    play()
+        play()
     }
-
+    
     override func viewWillLayoutSubviews() {
         
         collectionView.snp.remakeConstraints { (make) in
-            make.left.right.equalToSuperview()
-            make.centerY.equalToSuperview()
-            make.height.height.equalTo(300)
+            make.top.left.right.equalToSuperview()
+            make.bottom.equalTo(-100)
         }
     }
     
