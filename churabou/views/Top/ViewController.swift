@@ -29,10 +29,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .orange
-        view.addSubview(tableView)
- 
-        
+
+        view.addSubview(tableView) 
         //おそらくリクエスト中にsubscribeしている。
         DispatchQueue.global().async {
             print("リクエスト")
@@ -47,12 +45,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         return CategoryTableViewCell.height
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {            
-        let v = CategoryDetailViewController()
-        v.setVM(targets[indexPath.row])
-        navigationController?.pushViewController(v, animated: true)
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return targets.count
     }
@@ -62,8 +54,18 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? CategoryTableViewCell else {
             return UITableViewCell()
         }
+        cell.delegate = self
         cell.setUp(targets[indexPath.row])
+        cell.indexPath = indexPath
         return cell
     }
 }
 
+extension ViewController: CategoryTableViewCellDelegate {
+  
+    func didSelectAll(_ indexPath: IndexPath) {
+        let v = CategoryDetailViewController()
+        v.setVM(targets[indexPath.row])
+        navigationController?.pushViewController(v, animated: true)
+    }
+}

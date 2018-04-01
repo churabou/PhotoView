@@ -22,7 +22,6 @@ class ViewerController: UIViewController {
         
         layout.scrollDirection = .horizontal
         let v = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        v.backgroundColor = .green
         v.dataSource = self
         v.delegate = self
         v.alwaysBounceVertical = true

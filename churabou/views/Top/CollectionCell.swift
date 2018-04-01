@@ -12,12 +12,23 @@ import Kingfisher
 class CollectionCell: UICollectionViewCell {
     
     fileprivate var imageView = UIImageView()
+    var makeCircle = false
    
     func setUp() {
         contentView.addSubview(imageView)
     }
+
+    override func draw(_ rect: CGRect) {
+        
+        if makeCircle {
+            contentView.backgroundColor = .white
+            imageView.layer.cornerRadius = imageView.frame.height/2
+            imageView.clipsToBounds = true
+        }
+    }
     
     override func layoutSubviews() {
+
         imageView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }

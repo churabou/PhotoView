@@ -10,12 +10,18 @@ import SnapKit
 import Kingfisher
 import RxSwift
 
+protocol CategoryTableViewCellDelegate: class {
+    func didSelectAll(_ indexPath: IndexPath)
+    
+}
 class CategoryTableViewCell: UITableViewCell {
     
     static var height: CGFloat {
         return (UIScreen.main.bounds.width/2 + 55)
     }
     
+    weak var delegate: CategoryTableViewCellDelegate?
+    var indexPath = IndexPath()
     fileprivate var model = ViewModel()
     fileprivate lazy var nameLabel: UILabel = {
         let l = UILabel()
@@ -29,6 +35,7 @@ class CategoryTableViewCell: UITableViewCell {
         let b = UIButton()
         b.setTitle("全て見る", for: .normal)
         b.setTitleColor(.red, for: .normal)
+        b.addTarget(self, action: #selector(actionButton), for: .touchUpInside)
         return b
     }()
 
@@ -36,7 +43,6 @@ class CategoryTableViewCell: UITableViewCell {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let v = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        v.backgroundColor = .green
         v.dataSource = self
         v.delegate = self
         v.scrollIndicatorInsets = .zero
@@ -77,7 +83,11 @@ class CategoryTableViewCell: UITableViewCell {
             make.left.right.equalToSuperview()
             make.bottom.equalTo(-5)
         }
-    }    
+    }
+    
+    @objc private func actionButton() {
+        delegate?.didSelectAll(indexPath)
+    }
 }
 
 
@@ -114,6 +124,7 @@ extension CategoryTableViewCell: UICollectionViewDelegate, UICollectionViewDataS
         }
         
         cell.setUp()
+        cell.makeCircle = true
         cell.loadImage(url: model.model$.value[indexPath.row])
         return cell
     }
