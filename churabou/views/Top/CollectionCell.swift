@@ -12,15 +12,14 @@ import Kingfisher
 class CollectionCell: UICollectionViewCell {
     
     fileprivate var imageView = UIImageView()
+   
     func setUp() {
-        backgroundColor = .red
         contentView.addSubview(imageView)
     }
     
     override func layoutSubviews() {
         imageView.snp.makeConstraints { (make) in
-            make.top.left.equalTo(5)
-            make.right.bottom.equalTo(-5)
+            make.edges.equalToSuperview()
         }
     }
     

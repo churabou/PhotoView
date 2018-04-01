@@ -22,6 +22,7 @@ class ViewController: UIViewController {
         t.register(CategoryTableViewCell.self, forCellReuseIdentifier: "cell")
         t.dataSource = self
         t.delegate = self
+        t.allowsSelection = false
         return t
     }()
     

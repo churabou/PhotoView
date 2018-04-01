@@ -39,7 +39,6 @@ class CategoryTableViewCell: UITableViewCell {
         v.backgroundColor = .green
         v.dataSource = self
         v.delegate = self
-        v.alwaysBounceVertical = true
         v.scrollIndicatorInsets = .zero
         v.register(CollectionCell.self, forCellWithReuseIdentifier: "cell")
         return v
