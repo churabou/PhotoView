@@ -10,8 +10,10 @@ import SnapKit
 import Kingfisher
 import RxSwift
 
+
 protocol CategoryTableViewCellDelegate: class {
     func didSelectAll(_ indexPath: IndexPath)
+    func didSelectImage(_ v: UIViewController)
 }
 
 class CategoryTableViewCell: UITableViewCell {
@@ -133,6 +135,9 @@ extension CategoryTableViewCell: UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath)
+        let v = ViewerController()
+        v.share(viewModel: model)
+        delegate?.didSelectImage(v)
     }
 }
 

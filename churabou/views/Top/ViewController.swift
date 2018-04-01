@@ -68,4 +68,8 @@ extension ViewController: CategoryTableViewCellDelegate {
         v.setVM(targets[indexPath.row])
         navigationController?.pushViewController(v, animated: true)
     }
+    
+    func didSelectImage(_ v: UIViewController) {
+         navigationController?.pushViewController(v, animated: true)
+    }
 }
