@@ -25,22 +25,19 @@ class ViewController: UIViewController {
         view.backgroundColor = .orange
         view.addSubview(tableView)
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
-        let v = CategoryDetailViewController()
-        navigationController?.pushViewController(v, animated: true)
-    }
-    
 }
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-
         return CategoryTableViewCell.height
     }
-
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {            
+        let v = CategoryDetailViewController()
+        navigationController?.pushViewController(v, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
     }

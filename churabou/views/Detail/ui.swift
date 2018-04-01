@@ -11,6 +11,7 @@ import SnapKit
 fileprivate final class TopView: UIView {
     
     fileprivate var closeButton = UIButton()
+    fileprivate var slider = UISlider()
     
     func setUp() {
         backgroundColor = .blue
@@ -28,9 +29,7 @@ fileprivate final class TopView: UIView {
     }
 }
 
-
-
-fileprivate final class BottomView: UIView {
+final class BottomView: UIView {
     
     fileprivate var playButton = UIButton()
     
@@ -38,6 +37,7 @@ fileprivate final class BottomView: UIView {
         backgroundColor = .blue
         playButton.setTitle("play", for: .normal)
         playButton.setTitleColor(.white, for: .normal)
+        playButton.addTarget(self, action: #selector(actionButton), for: .touchUpInside)
         addSubview(playButton)
     }
     
@@ -48,9 +48,14 @@ fileprivate final class BottomView: UIView {
             make.center.equalToSuperview()
         }
     }
+    
+    
+    var tapClosure = {}
+
+    @objc private func actionButton() {
+        tapClosure()
+    }
 }
-
-
 
 class PhotoViewer: UIView {
     
@@ -76,3 +81,8 @@ class PhotoViewer: UIView {
         }
     }
 }
+
+
+
+
+
