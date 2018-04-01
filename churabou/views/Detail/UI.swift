@@ -69,9 +69,19 @@ final class SliderView: UIView {
             make.right.equalTo(-50)
         }
     }
-
+    
+    fileprivate var value: Int = 4 {
+        didSet {
+            if oldValue != value {
+                delegate?.didValueChanged(value)
+            }
+        }
+    }
     @objc private func actionSlider(_ sender: UISlider) {
-        delegate?.didValueChanged(Int(sender.value))
+        
+        value = Int(round(sender.value))
+//        print(sender.value)
+      
     }
 }
 

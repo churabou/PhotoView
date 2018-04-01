@@ -12,15 +12,16 @@ class CategoryDetailViewController: UIViewController {
     
     fileprivate lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-//        layout.itemSize = CGSize(width: view.bounds.width/4, height: view.bounds.width/4)
+        layout.itemSize = CGSize(width: view.bounds.width/4, height: view.bounds.width/4)
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
-        layout.scrollDirection = .horizontal
+        layout.scrollDirection = .vertical
         let v = UICollectionView(frame: .zero, collectionViewLayout: layout)
         v.dataSource = self
         v.delegate = self
         v.alwaysBounceVertical = true
         v.scrollIndicatorInsets = .zero
+        v.backgroundColor = .white
         v.register(CollectionCell.self, forCellWithReuseIdentifier: "cell")
         return v
     }()
@@ -31,7 +32,6 @@ class CategoryDetailViewController: UIViewController {
     fileprivate var disPlayNum = 4
     
     override func viewDidLoad() {
-        view.backgroundColor = .blue
         view.addSubview(collectionView)
         slider.setUp()
         slider.delegate = self
@@ -73,21 +73,17 @@ extension CategoryDetailViewController: UICollectionViewDelegateFlowLayout {
         let s = view.bounds.width/CGFloat(disPlayNum)
         return CGSize(width: s-1, height: s-1)
     }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//        return UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
-//    }
-//
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
+    }
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
 }
 
 extension CategoryDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.model$.value.count

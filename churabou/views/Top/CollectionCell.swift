@@ -15,6 +15,7 @@ class CollectionCell: UICollectionViewCell {
     var makeCircle = false
    
     func setUp() {
+        backgroundColor = .white
         imageView.contentMode = .scaleAspectFit
         contentView.addSubview(imageView)
     }
