@@ -23,7 +23,6 @@ class ViewerController: UIViewController {
         let v = UICollectionView(frame: .zero, collectionViewLayout: layout)
         v.dataSource = self
         v.delegate = self
-        v.alwaysBounceVertical = true
         v.backgroundColor = .white
         v.scrollIndicatorInsets = .zero
         v.register(CollectionCell.self, forCellWithReuseIdentifier: "cell")

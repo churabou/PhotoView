@@ -12,7 +12,7 @@ import RxSwift
 
 
 protocol CategoryTableViewCellDelegate: class {
-    func didSelectAll(_ indexPath: IndexPath)
+    func didSelectAll(_ v: CategoryDetailViewController)
     func didSelectImage(_ v: UIViewController)
 }
 
@@ -23,7 +23,6 @@ class CategoryTableViewCell: UITableViewCell {
     }
     
     weak var delegate: CategoryTableViewCellDelegate?
-    var indexPath = IndexPath()
     fileprivate var model = ViewModel()
     fileprivate lazy var nameLabel: UILabel = {
         let l = UILabel()
@@ -90,7 +89,9 @@ class CategoryTableViewCell: UITableViewCell {
     }
     
     @objc private func actionButton() {
-        delegate?.didSelectAll(indexPath)
+        let v = CategoryDetailViewController()
+        v.setVM(model)
+        delegate?.didSelectAll(v)
     }
 }
 
@@ -100,8 +101,6 @@ class CategoryTableViewCell: UITableViewCell {
 extension CategoryTableViewCell: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // Sketchのレイアウト比率に合わせる / w320px: 140x190
-        
         let s = bounds.width/2
         return CGSize(width: s-10, height: s-10)
     }

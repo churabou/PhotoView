@@ -24,6 +24,7 @@ class CollectionCell: UICollectionViewCell {
         
         if makeCircle {
             contentView.backgroundColor = .white
+            imageView.contentMode = .scaleAspectFill
             imageView.layer.cornerRadius = imageView.frame.height/2
             imageView.clipsToBounds = true
         }

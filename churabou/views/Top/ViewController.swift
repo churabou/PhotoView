@@ -56,16 +56,13 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         }
         cell.delegate = self
         cell.setUp(targets[indexPath.row])
-        cell.indexPath = indexPath
         return cell
     }
 }
 
 extension ViewController: CategoryTableViewCellDelegate {
   
-    func didSelectAll(_ indexPath: IndexPath) {
-        let v = CategoryDetailViewController()
-        v.setVM(targets[indexPath.row])
+    func didSelectAll(_ v: CategoryDetailViewController) {
         navigationController?.pushViewController(v, animated: true)
     }
     
