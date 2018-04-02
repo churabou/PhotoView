@@ -24,7 +24,7 @@ class CollectionCell: UICollectionViewCell {
         
         if makeCircle {
             contentView.backgroundColor = .white
-            imageView.contentMode = .scaleAspectFill
+//            imageView.contentMode = .center
             imageView.layer.cornerRadius = imageView.frame.height/2
             imageView.clipsToBounds = true
         }
@@ -36,8 +36,14 @@ class CollectionCell: UICollectionViewCell {
             make.edges.equalToSuperview()
         }
     }
-    
+
     func loadImage(url: String) {
-        imageView.kf.setImage(with: URL(string: url))
+        imageView.kf.setImage(with: URL(string: url), completionHandler: { img, _, _, _ in
+            self.imageView.image = img?.cropThumbnailImage()
+        })
     }
 }
+
+
+//思い出の写真を見るときは音楽とともに楽しく
+//
