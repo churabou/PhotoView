@@ -11,7 +11,16 @@ import Alamofire
 
 
 
-
+struct Constants {
+    
+    static let key = ""
+    static let secret = ""
+    static let token = ""
+    
+    static var credential: String {
+        return "\(key):\(secret)".data(using: .utf8)!.base64EncodedString()
+    }
+}
 
 struct Api {
     
@@ -61,14 +70,13 @@ struct Api {
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: [])
 //                let models = try JSONDecoder().decode([Model].self, from: data)
-                
+//                debugPrint(models)
                 let urls = Timeline.fetchImages(json: json)
-               
                 DispatchQueue.main.async {
                      completion(urls)
                 }
      
-//                debugPrint(models)
+   
             } catch {
                 print(error.localizedDescription)
             }
@@ -84,12 +92,13 @@ struct Api {
         
             struct Entity: Codable {
                 let media: [Media]
+                
+                struct Media: Codable {
+                    var id: String
+                    var media_url: String
+                }
             }
-        
-            struct Media: Codable {
-                var id: String
-                var media_url: String
-            }
+
     }
     static func search(q: String) {
         
