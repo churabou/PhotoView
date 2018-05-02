@@ -41,7 +41,6 @@ class ViewerController: UIViewController {
 
     override func viewDidLoad() {
         view.addSubview(collectionView)
-        bottomView.setUp()
         bottomView.delegate = self
         view.addSubview(bottomView)
         collectionView.performBatchUpdates(nil, completion: { finished in

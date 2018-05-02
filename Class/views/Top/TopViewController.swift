@@ -27,11 +27,13 @@ class TopViewController: UIViewController {
         return t
     }()
     
+    private var navigator: TopViewNavigator?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.addSubview(tableView) 
+        view.addSubview(tableView)
+        navigator = TopViewNavigator(self)
         //おそらくリクエスト中にsubscribeしている。
         DispatchQueue.global().async {
             self.targets.forEach { $0.fetch() }
@@ -55,18 +57,17 @@ extension TopViewController: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         }
         cell.delegate = self
-        cell.setUp(targets[indexPath.row])
+        cell.update(targets[indexPath.row])
         return cell
     }
 }
 
 extension TopViewController: CategoryTableViewCellDelegate {
-  
-    func didSelectAll(_ v: CategoryDetailViewController) {
-        navigationController?.pushViewController(v, animated: true)
+    func didSelectAll(model: ImageModel) {
+        navigator?.navigate(to: .detail(model: model))
     }
     
-    func didSelectImage(_ v: UIViewController) {
-         navigationController?.pushViewController(v, animated: true)
+    func didSelectImage(at: Int, model: ImageModel) {
+        navigator?.navigate(to: .viewer(model: model, index: at))
     }
 }

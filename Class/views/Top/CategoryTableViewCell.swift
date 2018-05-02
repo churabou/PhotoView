@@ -12,11 +12,11 @@ import RxSwift
 
 
 protocol CategoryTableViewCellDelegate: class {
-    func didSelectAll(_ v: CategoryDetailViewController)
-    func didSelectImage(_ v: UIViewController)
+    func didSelectAll(model: ImageModel)
+    func didSelectImage(at: Int, model: ImageModel)
 }
 
-class CategoryTableViewCell: UITableViewCell {
+class CategoryTableViewCell: BaseTableViewCell {
     
     static var height: CGFloat {
         return (UIScreen.main.bounds.width/2 + 55)
@@ -54,20 +54,22 @@ class CategoryTableViewCell: UITableViewCell {
     }()
     
     private let bag = DisposeBag()
-    func setUp(_ viewModel: ImageModel) {
+    func update(_ viewModel: ImageModel) {
         model = viewModel
         model.model$.asObservable().subscribe(onNext: { _ in
             self.collectionView.reloadData()
         }).disposed(by: bag)
         nameLabel.text = model.name
+    }
+
+    override func initializeView() {
         addSubview(nameLabel)
         addSubview(showButton)
         addSubview(collectionView)
     }
     
-    
-    override func layoutSubviews() {
-       
+    override func initializeConstraints() {
+
         nameLabel.snp.makeConstraints { (make) in
             make.width.equalTo(150)
             make.height.equalTo(30)
@@ -87,11 +89,9 @@ class CategoryTableViewCell: UITableViewCell {
             make.bottom.equalTo(-5)
         }
     }
-    
+
     @objc private func actionButton() {
-        let v = CategoryDetailViewController()
-        v.update(model)
-        delegate?.didSelectAll(v)
+        delegate?.didSelectAll(model: model)
     }
 }
 
@@ -132,12 +132,6 @@ extension CategoryTableViewCell: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath)
-        let v = ViewerController()
-        v.bind(viewModel: model)
-        v.set(index: indexPath.row)
-        delegate?.didSelectImage(v)
+        delegate?.didSelectImage(at: indexPath.row, model: model)
     }
 }
-
-

@@ -15,15 +15,15 @@ protocol BottomViewDelegate: class {
     func didSelectBack()
 }
 
-final class BottomView: UIView {
+final class BottomView: BaseView {
     
     weak var delegate: BottomViewDelegate?
     fileprivate var playButton = UIButton()
     fileprivate var nextButton = UIButton()
     fileprivate var backButton = UIButton()
     
-    func setUp() {
-
+    override func initializeView() {
+        
         backgroundColor = .pink
 
         playButton.setTitle("play", for: .normal)
@@ -42,7 +42,7 @@ final class BottomView: UIView {
         addSubview(backButton)
     }
     
-    override func layoutSubviews() {
+    override func initializeConstraints() {
         
         playButton.snp.makeConstraints { (make) in
             make.width.equalToSuperview().dividedBy(3)
@@ -93,12 +93,13 @@ protocol SliderViewDelegate: class {
     func didValueChanged(_ value: Int)
 }
 
-final class SliderView: UIView {
+final class SliderView: BaseView {
     
     weak var delegate: SliderViewDelegate?
     fileprivate var slider = UISlider()
     
-    func setUp() {
+    override func initializeView() {
+
         backgroundColor = .pink
         slider.minimumValue = 1
         slider.maximumValue = 7
@@ -107,14 +108,15 @@ final class SliderView: UIView {
         addSubview(slider)
     }
     
-    override func layoutSubviews() {
+    override func initializeConstraints() {
+
         slider.snp.makeConstraints { (make) in
             make.top.bottom.equalToSuperview()
             make.left.equalTo(50)
             make.right.equalTo(-50)
         }
     }
-    
+
     fileprivate var value: Int = 4 {
         didSet {
             if oldValue != value {
@@ -122,10 +124,9 @@ final class SliderView: UIView {
             }
         }
     }
+
     @objc private func actionSlider(_ sender: UISlider) {
-        
         value = Int(round(sender.value))
-//        print(sender.value)
     }
     
     fileprivate var isShowing = false

@@ -32,7 +32,6 @@ class CategoryDetailViewController: UIViewController {
     override func viewDidLoad() {
         view.backgroundColor = .white
         view.addSubview(collectionView)
-        slider.setUp()
         slider.delegate = self
         view.addSubview(slider)
     }

@@ -60,7 +60,6 @@ struct Api {
                 fatalError("aaaa")
             }
             
-            
             if let response = response as? HTTPURLResponse {
                 print(response.statusCode)
                 print(response.allHeaderFields)
@@ -75,8 +74,6 @@ struct Api {
                 DispatchQueue.main.async {
                      completion(urls)
                 }
-     
-   
             } catch {
                 print(error.localizedDescription)
             }
