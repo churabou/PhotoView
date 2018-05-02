@@ -8,12 +8,13 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class TopViewController: UIViewController {
     
-    let targets: [ViewModel] = [
-        ViewModel("子犬・子猫", "dogs_cats_bot"),
-        ViewModel("ラーメン","capital_noodle"),
-        ViewModel("パンケーキ","pancake__suki")
+    let targets: [ImageModel] = [
+        ImageModel("子犬・子猫", "dogs_cats_bot"),
+        ImageModel("ラーメン","capital_noodle"),
+        ImageModel("パンケーキ","pancake__suki"),
+        ImageModel("ポケモン","p0kemoncute")
     ]
 
     fileprivate lazy var tableView: UITableView = {
@@ -33,13 +34,12 @@ class ViewController: UIViewController {
         view.addSubview(tableView) 
         //おそらくリクエスト中にsubscribeしている。
         DispatchQueue.global().async {
-            print("リクエスト")
             self.targets.forEach { $0.fetch() }
         }
     }
 }
 
-extension ViewController: UITableViewDataSource, UITableViewDelegate {
+extension TopViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CategoryTableViewCell.height
@@ -60,7 +60,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-extension ViewController: CategoryTableViewCellDelegate {
+extension TopViewController: CategoryTableViewCellDelegate {
   
     func didSelectAll(_ v: CategoryDetailViewController) {
         navigationController?.pushViewController(v, animated: true)

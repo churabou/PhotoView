@@ -1,38 +1,23 @@
 //
-//  ViewModel.swift
+//  extension.swift
 //  churabou
 //
-//  Created by ちゅーたつ on 2018/04/01.
+//  Created by ちゅーたつ on 2018/04/02.
 //  Copyright © 2018年 ちゅーたつ. All rights reserved.
 //
 
-import Foundation
-import RxSwift
+import UIKit
 
-class ViewModel {
-    
-    var name = ""
-    var target = ""
-    
-    convenience init(_ name: String, _ target: String) {
-        self.init()
-        self.name = name
-        self.target = target
-    }
-
-    var model$: Variable<[String]> = Variable([])
-
-    func fetch() {
-        getImage(of: target, completion: { urls in
-            self.model$.value = urls
-        })
+extension UIColor {
+    class var pink: UIColor {
+        return UIColor(red: 1, green: 192/255, blue: 203/255, alpha: 1)
     }
 }
 
+
 extension UIImage {
     
-    func cropThumbnailImage() ->UIImage
-    {
+    func cropThumbnailImage() -> UIImage {
         let s = min(size.width, size.height)
         // リサイズ処理
         guard let origRef = cgImage else {
@@ -40,7 +25,8 @@ extension UIImage {
         }
         let origWidth  = CGFloat(origRef.width)
         let origHeight = CGFloat(origRef.height)
-        var resizeWidth: CGFloat = 0, resizeHeight: CGFloat = 0
+        var resizeWidth: CGFloat = 0
+        var resizeHeight: CGFloat = 0
         
         if (origWidth < origHeight) {
             resizeWidth = s

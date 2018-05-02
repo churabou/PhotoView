@@ -10,13 +10,22 @@ import UIKit
 import AVFoundation
 
 class ViewerController: UIViewController {
-    
-    fileprivate var viewModel = ViewModel()
 
-    func bind(viewModel: ViewModel) {
+    fileprivate var selectedIndex = 0
+    
+    func set(index: Int) {
+        selectedIndex = index
+    }
+    
+    fileprivate var viewModel = ImageModel()
+   
+    func bind(viewModel: ImageModel) {
         self.viewModel = viewModel
     }
-
+    
+    fileprivate var timer: Timer?
+    fileprivate var audioPlayer: AVAudioPlayer?
+    fileprivate var bottomView = BottomView()
     fileprivate lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -29,48 +38,104 @@ class ViewerController: UIViewController {
         v.isPagingEnabled = true
         return v
     }()
-    
+
     override func viewDidLoad() {
         view.addSubview(collectionView)
-        play()
+        bottomView.setUp()
+        bottomView.delegate = self
+        view.addSubview(bottomView)
+        collectionView.performBatchUpdates(nil, completion: { finished in
+            self.scroll(to: self.selectedIndex)
+        })
     }
     
     override func viewWillLayoutSubviews() {
         
-        collectionView.snp.remakeConstraints { (make) in
+        collectionView.snp.makeConstraints { (make) in
             make.top.left.right.equalToSuperview()
-            make.bottom.equalTo(-100)
+            make.bottom.equalTo(-70)
+        }
+        
+        bottomView.snp.makeConstraints { (make) in
+            make.left.bottom.right.equalToSuperview()
+            make.height.equalTo(70)
         }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        audioPlayer.stop()
+        audioPlayer?.stop()
     }
     
-    var audioPlayer: AVAudioPlayer!
+    func scroll(to: Int, animated: Bool = false) {
+        collectionView.contentOffset.x = CGFloat(to) * collectionView.bounds.width
+    }
     
-    func play() {
+    @objc fileprivate func actionTimer() {
      
-        guard let path = Bundle.main.path(forResource: "koinu", ofType: "mp3") else {
+        let currentIndex = Int(collectionView.contentOffset.x / collectionView.bounds.width)
+        if currentIndex == viewModel.model$.value.count-1 {
+            collectionView.contentOffset.x = 0
+        }
+        let x = collectionView.bounds.width
+        collectionView.contentOffset.x += x
+    }
+
+    fileprivate var currentIndex: Int {
+        return Int(collectionView.contentOffset.x / collectionView.bounds.width)
+    }
+}
+
+extension ViewerController: BottomViewDelegate {
+    
+    func didSelectBack() {
+
+        if currentIndex == 0 {
             return
         }
-        let audioUrl = URL(fileURLWithPath: path)
-        audioPlayer = try! AVAudioPlayer(contentsOf: audioUrl)
-        audioPlayer.play()
-        
-//        let t = Double(viewModel.models.count)
-//        UIView.animate(withDuration: t, animations: {
-//            self.collectionView.contentOffset.x = 100
+        collectionView.contentOffset.x -=  collectionView.bounds.width
+
+//        UIView.animate(withDuration: 0.3, animations: {
+//            self.collectionView.contentOffset.x -= x
 //        })
     }
     
+    func didSelectNext() {
+        
+        if currentIndex == viewModel.model$.value.count-1 {
+            return
+        }
+        collectionView.contentOffset.x += collectionView.bounds.width
+//        UIView.animate(withDuration: 0.3, animations: {
+//            self.collectionView.contentOffset.x += x
+//        })
+    }
     
+    func didSelectPlay(_ isPlaying: Bool) {
+        
+        if isPlaying {
+            timer?.invalidate()
+            audioPlayer?.stop()
+        } else {
+            guard let path = Bundle.main.path(forResource: "koinu", ofType: "mp3") else {
+                return
+            }
+            let audioUrl = URL(fileURLWithPath: path)
+            audioPlayer = try? AVAudioPlayer(contentsOf: audioUrl)
+            audioPlayer?.play()
+            
+            timer = Timer.scheduledTimer(timeInterval: 0.5,
+                                         target: self,
+                                         selector: #selector(actionTimer),
+                                         userInfo: nil,
+                                         repeats: true)
+        }
+    }
 }
+
 
 extension ViewerController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // Sketchのレイアウト比率に合わせる / w320px: 140x190
         
         let w = UIScreen.main.bounds.width-10
         return CGSize(width: w, height: w)
@@ -95,7 +160,7 @@ extension ViewerController: UICollectionViewDelegate, UICollectionViewDataSource
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? CollectionCell else {
             return UICollectionViewCell()
         }
-        cell.setUp()
+
         cell.loadImage(url: viewModel.model$.value[indexPath.row])
         return cell
     }

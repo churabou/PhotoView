@@ -17,7 +17,7 @@ struct Timeline: Codable {
         
         let text: String
         let created_at: String
-        let entities: Entity
+//        let entities: Entity
     }
     
     struct Entity: Codable {
@@ -38,13 +38,24 @@ extension Timeline {
 
     static func fetchImages(json: Any) -> [String] {
         
-        let array = JSON(json).arrayValue
-        var ary: [String] = []
-        array.forEach { json in
-            if let url = json["entities"]["media"][0]["media_url_https"].string {
-                ary.append(url)
-            }
+        return JSON(json)
+            .arrayValue
+            .compactMap { $0["entities"]["media"][0]["media_url_https"].string}
         }
-        return ary
-    }
+}
+
+
+struct Tweet: Codable {
+    
+    let text: String
+    let created_at: String
+//    let entities: Any
+//
+//    struct Entity: Codable {
+//        let media: [Media]
+//    }
+//
+//    struct Media: Codable {
+//        let media_url: String
+//    }
 }

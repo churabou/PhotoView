@@ -12,7 +12,6 @@ class CategoryDetailViewController: UIViewController {
     
     fileprivate lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: view.bounds.width/4, height: view.bounds.width/4)
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         layout.scrollDirection = .vertical
@@ -26,30 +25,29 @@ class CategoryDetailViewController: UIViewController {
         return v
     }()
     
-    fileprivate var viewModel = ViewModel()
+    fileprivate var viewModel = ImageModel()
     fileprivate var slider = SliderView()
-    fileprivate var viewer = ViewerController()
-    fileprivate var disPlayNum = 4
+    fileprivate var disPlayNum = 3
     
     override func viewDidLoad() {
+        view.backgroundColor = .white
         view.addSubview(collectionView)
         slider.setUp()
         slider.delegate = self
         view.addSubview(slider)
     }
-    
-    func setVM(_ viewModel: ViewModel) {
+
+    func update(_ viewModel: ImageModel) {
         self.viewModel = viewModel
-        viewer.bind(viewModel: viewModel)
     }
     
     override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
 
         collectionView.snp.remakeConstraints { (make) in
             make.top.left.right.equalToSuperview()
             make.bottom.equalTo(-70)
         }
-        
         
         slider.snp.makeConstraints { (make) in
             make.left.right.bottom.equalToSuperview()
@@ -59,7 +57,9 @@ class CategoryDetailViewController: UIViewController {
 }
 
 extension CategoryDetailViewController: SliderViewDelegate {
+
     func didValueChanged(_ value: Int) {
+        
         disPlayNum = value
         collectionView.reloadData()
     }
@@ -68,18 +68,9 @@ extension CategoryDetailViewController: SliderViewDelegate {
 extension CategoryDetailViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // Sketchのレイアウト比率に合わせる / w320px: 140x190
 
         let s = view.bounds.width/CGFloat(disPlayNum)
-        return CGSize(width: s-1, height: s-1)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        return CGSize(width: s, height: s)
     }
 }
 
@@ -93,15 +84,31 @@ extension CategoryDetailViewController: UICollectionViewDelegate, UICollectionVi
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? CollectionCell else {
             return UICollectionViewCell()
         }
-        cell.setUp()
+
         cell.loadImage(url: viewModel.model$.value[indexPath.row])
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        navigationController?.pushViewController(viewer, animated: true)
+        let v = ViewerController()
+        v.bind(viewModel: viewModel)
+        v.set(index: indexPath.row)
+        navigationController?.pushViewController(v, animated: true)
     }
 }
+
+extension CategoryDetailViewController: UIScrollViewDelegate {
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        if velocity.y > 0 {
+            slider.hide(animated: true)
+        } else {
+            slider.show(animated: true)
+        }
+    }
+}
+
+
 
 
 

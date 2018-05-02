@@ -23,7 +23,7 @@ class CategoryTableViewCell: UITableViewCell {
     }
     
     weak var delegate: CategoryTableViewCellDelegate?
-    fileprivate var model = ViewModel()
+    fileprivate var model = ImageModel()
     fileprivate lazy var nameLabel: UILabel = {
         let l = UILabel()
         l.font = UIFont.boldSystemFont(ofSize: 18)
@@ -35,7 +35,7 @@ class CategoryTableViewCell: UITableViewCell {
     fileprivate lazy var showButton: UIButton = {
         let b = UIButton()
         b.setTitle("全て見る", for: .normal)
-        b.backgroundColor = UIColor(red: 1, green: 192/255, blue: 203/255, alpha: 1)
+        b.backgroundColor = .pink
         b.setTitleColor(.white, for: .normal)
         b.addTarget(self, action: #selector(actionButton), for: .touchUpInside)
         return b
@@ -54,7 +54,7 @@ class CategoryTableViewCell: UITableViewCell {
     }()
     
     private let bag = DisposeBag()
-    func setUp(_ viewModel: ViewModel) {
+    func setUp(_ viewModel: ImageModel) {
         model = viewModel
         model.model$.asObservable().subscribe(onNext: { _ in
             self.collectionView.reloadData()
@@ -90,7 +90,7 @@ class CategoryTableViewCell: UITableViewCell {
     
     @objc private func actionButton() {
         let v = CategoryDetailViewController()
-        v.setVM(model)
+        v.update(model)
         delegate?.didSelectAll(v)
     }
 }
@@ -126,8 +126,7 @@ extension CategoryTableViewCell: UICollectionViewDelegate, UICollectionViewDataS
             return UICollectionViewCell()
         }
         
-        cell.setUp()
-        cell.makeCircle = true
+        cell.makeCircle()
         cell.loadImage(url: model.model$.value[indexPath.row])
         return cell
     }
@@ -136,6 +135,7 @@ extension CategoryTableViewCell: UICollectionViewDelegate, UICollectionViewDataS
         print(indexPath)
         let v = ViewerController()
         v.bind(viewModel: model)
+        v.set(index: indexPath.row)
         delegate?.didSelectImage(v)
     }
 }

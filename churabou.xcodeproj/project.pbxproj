@@ -7,13 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E81B40ED9748C5D65281EB3 /* Pods_churabou.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2524F530C4DA91AD431B66E3 /* Pods_churabou.framework */; };
+		C91321CA2070A82F00F1DA6F /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91321C92070A82F00F1DA6F /* Tweet.swift */; };
+		C91321D02070A9EF00F1DA6F /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91321CF2070A9EF00F1DA6F /* CollectionCell.swift */; };
+		C91321D42070B1ED00F1DA6F /* ViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91321D32070B1ED00F1DA6F /* ViewerController.swift */; };
+		C91321D72070B39B00F1DA6F /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91321D62070B39B00F1DA6F /* ImageModel.swift */; };
+		C91321D92070B98900F1DA6F /* koinu.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C91321D82070B98900F1DA6F /* koinu.mp3 */; };
+		C91321DB2071D73900F1DA6F /* extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91321DA2071D73900F1DA6F /* extension.swift */; };
+		C91321DE2071F8F500F1DA6F /* TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91321DD2071F8F400F1DA6F /* TopViewController.swift */; };
 		C9395B0A206F5C4D00390D88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9395B09206F5C4D00390D88 /* AppDelegate.swift */; };
-		C9395B0C206F5C4D00390D88 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9395B0B206F5C4D00390D88 /* ViewController.swift */; };
-		C9395B0F206F5C4D00390D88 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9395B0D206F5C4D00390D88 /* Main.storyboard */; };
 		C9395B11206F5C4D00390D88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9395B10206F5C4D00390D88 /* Assets.xcassets */; };
 		C9395B14206F5C4D00390D88 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9395B12206F5C4D00390D88 /* LaunchScreen.storyboard */; };
 		C9395B1F206F5C4D00390D88 /* churabouTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9395B1E206F5C4D00390D88 /* churabouTests.swift */; };
 		C9395B2A206F5C4D00390D88 /* churabouUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9395B29206F5C4D00390D88 /* churabouUITests.swift */; };
+		C9395B38206F772800390D88 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9395B37206F772800390D88 /* API.swift */; };
+		C9395B3A206F7EAF00390D88 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9395B39206F7EAF00390D88 /* CategoryTableViewCell.swift */; };
+		C9395B3C206F7EC800390D88 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9395B3B206F7EC800390D88 /* DetailViewController.swift */; };
+		C9F96C79206F8AF200420CA8 /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F96C78206F8AF200420CA8 /* UI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,10 +44,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2524F530C4DA91AD431B66E3 /* Pods_churabou.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_churabou.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7841D79DF74874C714198A4D /* Pods-churabou.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-churabou.debug.xcconfig"; path = "Pods/Target Support Files/Pods-churabou/Pods-churabou.debug.xcconfig"; sourceTree = "<group>"; };
+		C91321C92070A82F00F1DA6F /* Tweet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
+		C91321CF2070A9EF00F1DA6F /* CollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
+		C91321D32070B1ED00F1DA6F /* ViewerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewerController.swift; sourceTree = "<group>"; };
+		C91321D62070B39B00F1DA6F /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
+		C91321D82070B98900F1DA6F /* koinu.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = koinu.mp3; sourceTree = "<group>"; };
+		C91321DA2071D73900F1DA6F /* extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extension.swift; sourceTree = "<group>"; };
+		C91321DD2071F8F400F1DA6F /* TopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopViewController.swift; sourceTree = "<group>"; };
 		C9395B06206F5C4D00390D88 /* churabou.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = churabou.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9395B09206F5C4D00390D88 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C9395B0B206F5C4D00390D88 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		C9395B0E206F5C4D00390D88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C9395B10206F5C4D00390D88 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C9395B13206F5C4D00390D88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C9395B15206F5C4D00390D88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -47,6 +64,11 @@
 		C9395B25206F5C4D00390D88 /* churabouUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = churabouUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9395B29206F5C4D00390D88 /* churabouUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = churabouUITests.swift; sourceTree = "<group>"; };
 		C9395B2B206F5C4D00390D88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C9395B37206F772800390D88 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		C9395B39206F7EAF00390D88 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
+		C9395B3B206F7EC800390D88 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		C9F96C78206F8AF200420CA8 /* UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
+		FA28774ED53A3259FB914B0F /* Pods-churabou.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-churabou.release.xcconfig"; path = "Pods/Target Support Files/Pods-churabou/Pods-churabou.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E81B40ED9748C5D65281EB3 /* Pods_churabou.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +97,69 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C7752B9EBD4C0A474F442B47 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2524F530C4DA91AD431B66E3 /* Pods_churabou.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C91321CB2070A83700F1DA6F /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				C9395B37206F772800390D88 /* API.swift */,
+				C91321C92070A82F00F1DA6F /* Tweet.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		C91321CC2070A91500F1DA6F /* views */ = {
+			isa = PBXGroup;
+			children = (
+				C91321D62070B39B00F1DA6F /* ImageModel.swift */,
+				C91321CD2070A92300F1DA6F /* Top */,
+				C91321CE2070A92C00F1DA6F /* Detail */,
+				C91321D52070B1F100F1DA6F /* Viewer */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		C91321CD2070A92300F1DA6F /* Top */ = {
+			isa = PBXGroup;
+			children = (
+				C9395B39206F7EAF00390D88 /* CategoryTableViewCell.swift */,
+				C91321DD2071F8F400F1DA6F /* TopViewController.swift */,
+				C91321CF2070A9EF00F1DA6F /* CollectionCell.swift */,
+			);
+			path = Top;
+			sourceTree = "<group>";
+		};
+		C91321CE2070A92C00F1DA6F /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				C9395B3B206F7EC800390D88 /* DetailViewController.swift */,
+				C9F96C78206F8AF200420CA8 /* UI.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		C91321D52070B1F100F1DA6F /* Viewer */ = {
+			isa = PBXGroup;
+			children = (
+				C91321D32070B1ED00F1DA6F /* ViewerController.swift */,
+			);
+			path = Viewer;
+			sourceTree = "<group>";
+		};
+		C91321DC2071D74000F1DA6F /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				C91321DA2071D73900F1DA6F /* extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		C9395AFD206F5C4D00390D88 = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +167,8 @@
 				C9395B1D206F5C4D00390D88 /* churabouTests */,
 				C9395B28206F5C4D00390D88 /* churabouUITests */,
 				C9395B07206F5C4D00390D88 /* Products */,
+				D6B62C0C2D7C29A41C3CC0BA /* Pods */,
+				C7752B9EBD4C0A474F442B47 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -98,11 +186,13 @@
 			isa = PBXGroup;
 			children = (
 				C9395B09206F5C4D00390D88 /* AppDelegate.swift */,
-				C9395B0B206F5C4D00390D88 /* ViewController.swift */,
-				C9395B0D206F5C4D00390D88 /* Main.storyboard */,
+				C91321CC2070A91500F1DA6F /* views */,
+				C91321CB2070A83700F1DA6F /* Api */,
+				C91321DC2071D74000F1DA6F /* Extension */,
 				C9395B10206F5C4D00390D88 /* Assets.xcassets */,
 				C9395B12206F5C4D00390D88 /* LaunchScreen.storyboard */,
 				C9395B15206F5C4D00390D88 /* Info.plist */,
+				C91321D82070B98900F1DA6F /* koinu.mp3 */,
 			);
 			path = churabou;
 			sourceTree = "<group>";
@@ -125,6 +215,15 @@
 			path = churabouUITests;
 			sourceTree = "<group>";
 		};
+		D6B62C0C2D7C29A41C3CC0BA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7841D79DF74874C714198A4D /* Pods-churabou.debug.xcconfig */,
+				FA28774ED53A3259FB914B0F /* Pods-churabou.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +231,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C9395B2E206F5C4D00390D88 /* Build configuration list for PBXNativeTarget "churabou" */;
 			buildPhases = (
+				B12A2468EA4AFFEF375023D3 /* [CP] Check Pods Manifest.lock */,
 				C9395B02206F5C4D00390D88 /* Sources */,
 				C9395B03206F5C4D00390D88 /* Frameworks */,
 				C9395B04206F5C4D00390D88 /* Resources */,
+				3B40FEC83E3285E911C594FF /* [CP] Embed Pods Frameworks */,
+				E76D7EFFA02A499792DF97C0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -233,8 +335,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9395B14206F5C4D00390D88 /* LaunchScreen.storyboard in Resources */,
+				C91321D92070B98900F1DA6F /* koinu.mp3 in Resources */,
 				C9395B11206F5C4D00390D88 /* Assets.xcassets in Resources */,
-				C9395B0F206F5C4D00390D88 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,13 +356,84 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3B40FEC83E3285E911C594FF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-churabou/Pods-churabou-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-churabou/Pods-churabou-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B12A2468EA4AFFEF375023D3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-churabou-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E76D7EFFA02A499792DF97C0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-churabou/Pods-churabou-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C9395B02206F5C4D00390D88 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C9395B0C206F5C4D00390D88 /* ViewController.swift in Sources */,
+				C91321D72070B39B00F1DA6F /* ImageModel.swift in Sources */,
+				C91321D42070B1ED00F1DA6F /* ViewerController.swift in Sources */,
+				C9395B38206F772800390D88 /* API.swift in Sources */,
+				C9F96C79206F8AF200420CA8 /* UI.swift in Sources */,
+				C91321DE2071F8F500F1DA6F /* TopViewController.swift in Sources */,
+				C91321D02070A9EF00F1DA6F /* CollectionCell.swift in Sources */,
+				C91321CA2070A82F00F1DA6F /* Tweet.swift in Sources */,
+				C91321DB2071D73900F1DA6F /* extension.swift in Sources */,
 				C9395B0A206F5C4D00390D88 /* AppDelegate.swift in Sources */,
+				C9395B3C206F7EC800390D88 /* DetailViewController.swift in Sources */,
+				C9395B3A206F7EAF00390D88 /* CategoryTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,14 +469,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		C9395B0D206F5C4D00390D88 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C9395B0E206F5C4D00390D88 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		C9395B12206F5C4D00390D88 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -424,6 +589,7 @@
 		};
 		C9395B2F206F5C4D00390D88 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7841D79DF74874C714198A4D /* Pods-churabou.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -439,6 +605,7 @@
 		};
 		C9395B30206F5C4D00390D88 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA28774ED53A3259FB914B0F /* Pods-churabou.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

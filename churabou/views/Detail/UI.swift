@@ -9,38 +9,83 @@
 import SnapKit
 
 
+protocol BottomViewDelegate: class {
+    func didSelectPlay(_ isPlaying: Bool)
+    func didSelectNext()
+    func didSelectBack()
+}
+
 final class BottomView: UIView {
     
+    weak var delegate: BottomViewDelegate?
     fileprivate var playButton = UIButton()
+    fileprivate var nextButton = UIButton()
+    fileprivate var backButton = UIButton()
     
     func setUp() {
-        backgroundColor = .blue
+
+        backgroundColor = .pink
+
         playButton.setTitle("play", for: .normal)
         playButton.setTitleColor(.white, for: .normal)
         playButton.addTarget(self, action: #selector(actionButton), for: .touchUpInside)
         addSubview(playButton)
+        
+        nextButton.setTitle("next", for: .normal)
+        nextButton.setTitleColor(.white, for: .normal)
+        nextButton.addTarget(self, action: #selector(actionNext), for: .touchUpInside)
+        addSubview(nextButton)
+        
+        backButton.setTitle("back", for: .normal)
+        backButton.setTitleColor(.white, for: .normal)
+        backButton.addTarget(self, action: #selector(actionBack), for: .touchUpInside)
+        addSubview(backButton)
     }
     
     override func layoutSubviews() {
+        
         playButton.snp.makeConstraints { (make) in
-            make.width.equalTo(100)
-            make.height.equalTo(30)
+            make.width.equalToSuperview().dividedBy(3)
             make.center.equalToSuperview()
+            make.top.bottom.equalToSuperview()
+        }
+        
+        nextButton.snp.makeConstraints { (make) in
+            make.width.equalToSuperview().dividedBy(3)
+            make.top.right.bottom.equalToSuperview()
+        }
+        
+        backButton.snp.makeConstraints { (make) in
+            make.width.equalToSuperview().dividedBy(3)
+            make.top.left.bottom.equalToSuperview()
         }
     }
     
-    
-    var tapClosure = {}
-
     @objc private func actionButton() {
-        tapClosure()
+        delegate?.didSelectPlay(isPlaying)
+        isPlaying = !isPlaying
     }
-}
-
-
-extension UIColor {
-    class var pink: UIColor {
-        return UIColor(red: 1, green: 192/255, blue: 203/255, alpha: 1)
+    
+    @objc private func actionNext() {
+        delegate?.didSelectNext()
+    }
+    
+    @objc private func actionBack() {
+        delegate?.didSelectBack()
+    }
+    
+    fileprivate var isPlaying = false {
+        didSet {
+            if isPlaying {
+                playButton.setTitle("stop", for: .normal)
+                nextButton.isHidden = true
+                backButton.isHidden = true
+            } else {
+                playButton.setTitle("play", for: .normal)
+                nextButton.isHidden = false
+                backButton.isHidden = false
+            }
+        }
     }
 }
 
@@ -81,7 +126,42 @@ final class SliderView: UIView {
         
         value = Int(round(sender.value))
 //        print(sender.value)
-      
+    }
+    
+    fileprivate var isShowing = false
+    func hide(animated: Bool) {
+        
+        if animated {
+            UIView.animate(withDuration: 0.2, animations: {
+                self.alpha = 0
+            }, completion: { _ in
+                self.isHidden = true
+            })
+        } else {
+            alpha = 0
+             isHidden = true
+        }
+        isShowing = false
+    }
+    
+    func show(animated: Bool) {
+        self.isHidden = false
+        if animated {
+            UIView.animate(withDuration: 0.2, animations: {
+                 self.alpha = 1
+            })
+        } else {
+            alpha = 1
+        }
+        isShowing = true
+    }
+    
+    func animate() {
+        if isShowing {
+            hide(animated: true)
+        } else {
+            show(animated: true)
+        }
     }
 }
 
